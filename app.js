@@ -19,6 +19,7 @@ const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
+const seeds = require('./models/seeds');
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -34,6 +35,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const wouldQuitController = require('./controllers/wouldquit');
 
 /**
  * API keys and Passport configuration.
@@ -54,6 +56,7 @@ mongoose.connection.on('error', () => {
   console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
   process.exit();
 });
+
 
 /**
  * Express configuration.
@@ -132,6 +135,11 @@ app.post('/account/profile', passportConfig.isAuthenticated, userController.post
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+app.get('/wouldquit/step1', wouldQuitController.selectCompany);
+app.get('/wouldquit/step2', wouldQuitController.selectReasons);
+app.get('/wouldquit/step3', wouldQuitController.finish);
+app.get('/wouldquit/stats', wouldQuitController.stats);
 
 /**
  * API examples routes.

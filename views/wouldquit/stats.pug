@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  .page-header
+    h1 WouldQuit Stats
+
+    each quitter in quitters
+      p.alert.alert-success #{quitter.user.email} working at #{quitter.company.name} would quit for those 3 reasons :
+      ul
+        each reason in quitter.reasons
+          li #{reason.name}
+        li Other reason : #{quitter.other_reason}
+
+

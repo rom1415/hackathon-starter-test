@@ -1,0 +1,15 @@
+[
+    {
+        "model": "Company",
+        "documents": [
+            {
+                "name": "name",
+                "value": "StepStone"
+            },
+            {
+                "name": "description",
+                "value": "StepStone Company Is Great!"
+            }
+        ]
+    }
+];

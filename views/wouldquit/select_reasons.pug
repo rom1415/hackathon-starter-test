@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 For which reasons would YOU quit ?
+
+    form.form-horizontal(method='GET', action='/wouldquit/step3')
+      input(type='hidden', name='_csrf', value=_csrf)
+      h2 1.
+        .form-group
+          select.form-control(type='select', name='reason1', id='reasons', autofocus=true)
+            each reason in reasons
+              option(value=reason._id) #{reason.name}
+
+      h2 2.
+        .form-group
+          select.form-control(type='select', name='reason2', id='reasons', autofocus=true)
+            each reason in reasons
+              option(value=reason._id) #{reason.name}
+
+      h2 3.
+        .form-group
+          select.form-control(type='select', name='reason3', id='reasons', autofocus=true)
+            each reason in reasons
+              option(value=reason._id) #{reason.name}
+
+      h3 Other reason
+        .form-group
+          textarea.form-control(type='text', name='other_reason', id='other_reason', autofocus=true)
+
+      .form-group
+        input.form-control(type='hidden', name="company", value=company_id)
+
+      .form-group
+        input.form-control(type='submit', value='Next')

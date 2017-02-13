@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .page-header
+    h3 Are you still working in this company ?
+
+    form.form-horizontal(method='GET', action='/wouldquit/step2')
+      input(type='hidden', name='_csrf', value=_csrf)
+      .form-group
+        select.form-control(type='select', name='company', id='company_id', autofocus=true)
+          each company in companies
+            option(value=company._id) #{company.name}
+
+      .form-group
+        input.form-control(type='submit', value='Next')
